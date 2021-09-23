@@ -1,0 +1,37 @@
+- name: Installing Python
+  yum:
+    name: 
+      - python36
+      - gcc
+      - python3-devel
+    state: present
+    
+- name: Dowloading Files
+  include_tasks: download.yml
+    
+- name: Install python packages.
+  pip:
+    requirements: /home/roboshop/{{COMPONENT}}/requirements.txt
+    executable: pip3
+    
+- name: Configuring payment.ini file
+  debug:
+    msg: "{{ROBOSHOP_USER}}"
+    
+- name: Replacing the User ID.
+  ansible.builtin.lineinfile:
+    path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
+    regexp: '^uid='
+    line: uid = {{ROBOSHOP_USER.uid}}
+    
+- name: Replacing the Group ID.
+  ansible.builtin.lineinfile:
+    path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
+    regexp: '^gid='
+    line: gid = {{ROBOSHOP_USER.group}}
+    
+- name: Configuring systemd
+  include_tasks: systemd.yml
+  
+- name: Includling Node_Exporter
+  include_tasks: node_exporter

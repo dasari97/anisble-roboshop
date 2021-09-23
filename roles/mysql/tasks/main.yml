@@ -1,0 +1,65 @@
+- name: Setting Up Mysql repostory
+  copy:
+    src: mysql.repo
+    dest: /etc/yum.repos.d/mysql.repo
+    
+- name: Removing Mariadb-library
+  yum:
+    name: mariadb-libs
+    state: absent
+    
+- name: Installing Mysql-community-server
+  yum:
+    name: 
+      - mysql-community-server
+      - MySQL-python
+    state: present
+    
+- name: Starting Mysql service
+  systemd:
+    name: mysqld
+    state: restarted
+    enabled: yes
+    
+- name: Checking for Default password
+  shell: echo 'show databases' | mysql -u root -pRoboShop@1
+  register: out
+  ignore_errors: yes
+
+- name: Finding default_password
+  shell: grep 'A temporary password' /var/log/mysqld.log | awk '{print $NF}'
+  register: default_pass
+  when: out.rc != 0
+  
+- name: Resetting sql file
+  copy:
+    src: reset.sql
+    dest: /tmp/rest.sql
+  when: out.rc != 0
+  
+- name: Changing Mysql default_password
+  shell: mysql --connect-expired-password -uroot -p"{{default_pass.stdout}}" </tmp/rest.sql
+  when: out.rc != 0
+  
+- name: Checking for Password Validate Plugin.
+  shell: echo 'show plugins;' | mysql -u root -pRoboShop@1 2>/dev/null | grep -i validate_password
+  register: val_out
+  ignore_errors: yes
+  
+- name: uninstall plugin validate_password
+  shell: echo "uninstall plugin validate_password;" >/tmp/pass.sql ; mysql -u root -p"RoboShop@1" </tmp/pass.sql
+  when: val_out.rc == 0
+  
+- name: Downlaoding Mysql zip file
+  ansible.builtin.unarchive:
+    src: "https://github.com/roboshop-devops-project/mysql/archive/main.zip"
+    dest: /tmp
+    remote_src: yes
+    
+- name: Loading Schema
+  mysql_db:
+    state: import
+    name: all
+    target: /tmp/mysql-main/shipping.sql
+    login_password: RoboShop@1
+    login_user: root

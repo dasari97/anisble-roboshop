@@ -1,0 +1,11 @@
+- name: Configuring Systemd services
+  copy: 
+    src: systemd.service
+    dest: /etc/systemd/system/{{COMPONENT}}.service
+    
+- name: Starting {{COMPONENT}} service
+  systemd:
+    name: "{{COMPONENT}}"
+    state: restarted
+    enabled: yes
+    daemon_reload: yes

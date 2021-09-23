@@ -1,0 +1,32 @@
+- name: Installing Erlang
+  yum: 
+    name: https://github.com/rabbitmq/erlang-rpm/releases/download/v23.2.6/erlang-23.2.6-1.el7.x86_64.rpm
+    state: present
+    
+- name: Setting up YUM repositories for RabbitMQ
+  shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash
+  
+- name: Installing RabbitMQ
+  yum:
+    name: rabbitmq-server
+    state: present
+    
+- name: Starting RabbitMQ
+  systemd:
+    name: rabbitmq-server
+    state: restarted
+    enabled: yes
+    
+- name: Adding roboshop user
+  community.rabbitmq.rabbitmq_user:
+    user: roboshop
+    password: roboshop123
+    vhost: /
+    configure_priv: .*
+    read_priv: .*
+    write_priv: .*
+    state: present
+    tags: administrator
+
+
+

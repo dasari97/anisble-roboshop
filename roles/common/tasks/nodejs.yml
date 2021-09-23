@@ -1,0 +1,21 @@
+- name: Installing NodeJS
+  yum:
+    name: 
+      - nodejs
+      - gcc-c++
+      - make
+    state: present
+    
+- name: Dowloading Files
+  include_tasks: download.yml
+    
+- name: Install NodeJS packages based on package.json.
+  community.general.npm:
+    path: /home/roboshop/{{COMPONENT}}
+  become_user: roboshop
+  
+- name: Configuring systemd
+  include_tasks: systemd.yml
+  
+- name: Includling Node_Exporter
+  include_tasks: node_exporter

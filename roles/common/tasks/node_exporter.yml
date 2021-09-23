@@ -1,0 +1,23 @@
+- name: Installing Node_Exporter
+  unarchive:
+    src: "https://github.com/prometheus/node_exporter/releases/download/v{{NE_version}}/node_exporter-{{NE_NE_version}}.linux-amd64.tar.gz"
+    dest: /opt
+    remote_src: yes
+    
+- name: Creating link file to node_exporter
+  ansible.builtin.file:
+    src: /opt/node_exporter-{{NE_version}}
+    dest: /opt/node_exporter
+    state: link
+    
+- name: Copying node_exporter.service file.
+  copy:
+    src: node_exporter.service
+    dest: /etc/systemd/system/node_exporter.service
+    
+- name: Starting Node_Exporter service.
+  systemd:
+    name: node_exporter
+    state: restarted
+    enabled: yes
+    daemon_reload: yes

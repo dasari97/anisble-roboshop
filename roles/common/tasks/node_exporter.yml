@@ -6,7 +6,7 @@
     
 - name: Creating link file to node_exporter
   ansible.builtin.file:
-    src: /opt/node_exporter-{{NE_version}}
+    src: /opt/node_exporter-{{NE_version}}.linux-amd64
     dest: /opt/node_exporter
     state: link
     

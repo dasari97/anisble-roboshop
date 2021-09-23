@@ -13,7 +13,7 @@ alerting:
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
-  # - "first_rules.yml"
+  # "records.yml"
   # - "second_rules.yml"
 
 # A scrape configuration containing exactly one endpoint to scrape:
@@ -33,4 +33,3 @@ scrape_configs:
         access_key: {{ACCESS_KEY}}
         secret_key: {{SECRET_KEY}}
         port: 9100
-

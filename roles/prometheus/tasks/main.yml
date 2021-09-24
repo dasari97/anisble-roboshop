@@ -12,4 +12,16 @@
     name: prometheus
     state: restarted
     enabled: yes
-
+    
+- name: Updating Alertmanager Configs
+  template: 
+    src: "{{item}}.yml"
+    dest: /opt/prometheus/{{item}}.yml
+  loop:
+      - alertmanager
+    
+- name: Restaring alertmanager
+  systemd:
+    name: alertmanager
+    state: restarted
+    enabled: yes

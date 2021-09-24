@@ -13,6 +13,7 @@ receivers:
         auth_username: {{userid}}
         auth_password: {{password}}
         require_tls: yes
+        send_resolved: yes
 inhibit_rules:
   - source_match:
       severity: 'critical'

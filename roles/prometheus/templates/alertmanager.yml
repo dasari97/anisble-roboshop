@@ -11,7 +11,7 @@ route:
 receivers:
   - name: 'slack-notifications'
   slack_configs:
-  - channel: '#monitoring-instances'
+  - channel: '#random'
     send_resolved: true
 inhibit_rules:
   - source_match:

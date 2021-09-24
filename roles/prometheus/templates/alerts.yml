@@ -8,3 +8,5 @@ groups:
       severity: critical
     annotations:
       summary: High_CPU_Usage in {%raw%}{{ $labels.instance }}{%endraw%}
+    
+    

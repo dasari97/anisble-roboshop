@@ -2,7 +2,7 @@ groups:
 - name: Instance Resources
   rules:
   - alert: High_CPU_Usage
-    expr: cpu_usage_in_percentage > 60
+    expr: cpu_usage_in_percentage > 90
     for: 30s
     labels:
       severity: critical

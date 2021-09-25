@@ -1,6 +1,6 @@
 global:
   resolve_timeout: 1m
-  slack_api_url: 'https://hooks.slack.com/services/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'
+  slack_api_url: 'https://hooks.slack.com/services/T02G6S3K6MN/B02FJGEURHT/eW9joKVAywcSIhRPth1JcbZ'
 route:
   group_wait: 30s
   group_interval: 1m
@@ -9,7 +9,7 @@ route:
 receivers:
   - name: 'slack-notifications'
     slack_configs:
-      - channel: '#saitarak1997'
+      - channel: '#roboshop'
         send_resolved: true
         text: {%raw%}"<!channel> \nsummary: {{ .CommonAnnotations.summary }}"{%endraw%}
 #  - name: email

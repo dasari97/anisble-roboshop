@@ -8,7 +8,7 @@ groups:
           severity: critical
         annotations:
           summary: "High_CPU_Usage on {%raw%}{{ $labels.tagName }}{%endraw%}\nEnv: DEV"
-
+          
   - name: HardwareResources
     rules:
       - alert: High_Memory_Usage

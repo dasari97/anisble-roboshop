@@ -7,7 +7,7 @@ groups:
         labels:
           severity: critical
         annotations:
-          summary: "High_CPU_Usage on {%raw%}{{ $labels.tagName }}{%endraw%}\nEnv: DEV"
+          summary: "High_CPU_Usage on {%raw%}{{ $labels.instance }}{%endraw%}"
           
   - name: MemoryResources
     rules:
@@ -17,4 +17,14 @@ groups:
         labels:
           severity: critical
         annotations:
-          summary: "High_Memory_Usage on {%raw%}{{ $labels.tagName }}{%endraw%}\nEnv: DEV"
+          summary: "High_Memory_Usage on {%raw%}{{ $labels.instance }}{%endraw%}"
+          
+  - name: ServiceCheck
+    rules:
+      - alert: ServiceDown
+        expr: node_systemd_unit_state{name=~"(catalogue|cart|nginx|payment|shipping|payment|user).service",state="active"} = 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Service_Down on {%raw%}{{ $labels.instance }}{%endraw%}"

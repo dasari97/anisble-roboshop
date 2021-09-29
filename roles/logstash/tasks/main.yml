@@ -1,0 +1,14 @@
+- name: Copying Logstash Config File.
+  copy:
+    src: logstash.conf
+    dest: /etc/logstash/conf.d/logstash.conf
+
+- name: Stopping Logstash.
+  systemd:
+    name: logstash
+    state: stopped
+    
+- name: Waiting for port 5400 to stop
+  wait_for:
+    port: 5400
+    

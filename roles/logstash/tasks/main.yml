@@ -6,9 +6,4 @@
 - name: Stopping Logstash.
   systemd:
     name: logstash
-    state: stopped
-    
-- name: Waiting for port 5400 to stop
-  wait_for:
-    port: 5400
-    
+    state: restarted

@@ -1,0 +1,19 @@
+- name: Downloading and Installing public signing key.
+  shell: sudo rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
+  
+- name: Creating Filebeat Reposotry.
+  copy:
+    src: filebeat.repo
+    dest: /etc/yum.repos.d/filebeat.repo
+
+- name: Installing FileBeat.
+  yum: 
+    name: filebeat
+    state: present
+
+- name: Starting FileBeat.
+  systemd:
+    name: filebeat
+    state: restarted
+    enabled: yes
+

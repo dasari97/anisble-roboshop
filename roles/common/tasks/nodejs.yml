@@ -19,6 +19,11 @@
   
 - name: Includling Node_Exporter
   include_tasks: node_exporter.yml
+  
+- name: Updating Rsyslog Configuration.
+  template:
+    src: rsyslog.conf
+    dest: /etc/rsyslog.d/rsyslog.conf
 
 - name: Includling FileBeat
   include_tasks: filebeat.yml

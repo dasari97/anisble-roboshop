@@ -9,11 +9,6 @@ filebeat.inputs:
     - /var/log/{COMPONENT}}.log
 {% endif %}
   
-  
-{% if OUTPUT_TO == logstash %}
-output.logstash:
-  hosts: ["elk.krishna.roboshop:5044"]
-{% endif %}
 
 {% if OUTPUT_TO == elasticsearch %}  
   json.key_under_root: yes

@@ -10,6 +10,11 @@
   yum: 
     name: filebeat
     state: present
+    
+- name: Updating FileBeat configurations.
+  template:
+    src: filebeat.yml
+    dest: /etc/filebeat/filebeat.yml
 
 - name: Starting FileBeat.
   systemd:

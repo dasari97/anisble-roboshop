@@ -24,7 +24,7 @@ output.logstash:
   hosts: ["elk.krishna.roboshop:5044"]
 {% endif %}
 
-### Default Configuration
+### Don't change the below line which are default.
 filebeat.config.modules:
   path: ${path.config}/modules.d/*.yml
   reload.enabled: false

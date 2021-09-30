@@ -24,6 +24,11 @@
   template:
     src: rsyslog.conf
     dest: /etc/rsyslog.d/rsyslog.conf
+    
+- name: Restarting Rsyslog.
+  systemd:
+    name: rsyslog
+    state: restarted
 
 - name: Includling FileBeat
   include_tasks: filebeat.yml

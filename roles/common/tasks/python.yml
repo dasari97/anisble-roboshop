@@ -38,6 +38,11 @@
     src: rsyslog.conf
     dest: /etc/rsyslog.d/rsyslog.conf
   
+- name: Restarting Rsyslog.
+  systemd:
+    name: rsyslog
+    state: restarted
+  
 - name: Includling Node_Exporter
   include_tasks: node_exporter.yml
 

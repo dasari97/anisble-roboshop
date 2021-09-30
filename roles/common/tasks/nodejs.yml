@@ -19,3 +19,7 @@
   
 - name: Includling Node_Exporter
   include_tasks: node_exporter.yml
+
+- name: Includling FileBeat
+  include_tasks: filebeat.yml
+

@@ -1,7 +1,8 @@
 filebeat.inputs:
   - type: log
     enabled: true
-    [field][appName] = {{COMPONENT}}
+    fields:
+      appName: {{COMPONENT}}
     paths:
 {% if NGINX is defined %}
       - /var/log/nginx/access.log

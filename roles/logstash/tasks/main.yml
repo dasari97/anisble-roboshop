@@ -18,7 +18,7 @@
 - name: Starting Logstash.
   systemd: 
     name: logstash
-    state: startedS
+    state: started
     
 - name: Waiting for port 5044 to start.
   wait_for:

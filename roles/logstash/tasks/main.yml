@@ -4,24 +4,25 @@
     dest: /etc/logstash/conf.d/logstash.conf
 
 - name: Stopping Logstash.
-  systemd:
+  systemd: 
     name: logstash
     state: stopped
     
-- name: Waiting for Port 5044 to stop.
+- name: Waiting for 5044 port to stop.
   wait_for:
     port: 5044
-    delay: 15
+    delay: 10
     state: stopped
     
+
 - name: Starting Logstash.
-  systemd:
+  systemd: 
     name: logstash
-    state: started
+    state: startedS
     
-- name: Waiting for Port 5044 to Start.
+- name: Waiting for port 5044 to start.
   wait_for:
     port: 5044
-    delay: 15
+    delay: 10
     state: started
 

@@ -18,6 +18,7 @@ filebeat.inputs:
 
 {% if COMPONENT == "payment" %}
     include_lines: ['\[[0-9]\]']
+{% endif %}
 
 {% if OUTPUT_TO == "elasticsearch" %}
     json.keys_under_root: true

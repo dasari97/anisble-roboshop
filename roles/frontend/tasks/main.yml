@@ -25,7 +25,7 @@
     src: roboshop.conf
     dest: /etc/nginx/default.d/roboshop.conf
     
-- name: Copying NGINX configuration file
+- name: Copying NGINX configuration File.
   ansible.builtin.copy:
     src: nginx.conf
     dest: /etc/nginx/nginx.conf

@@ -24,7 +24,12 @@
   ansible.builtin.copy:
     src: roboshop.conf
     dest: /etc/nginx/default.d/roboshop.conf
-
+    
+- name: Copying NGINX configuration file
+  ansible.builtin.copy:
+    src: nginx.conf
+    dest: /etc/nginx/nginx.conf
+    
 - name: Starting Nginx
   systemd:
     name: nginx

@@ -16,6 +16,10 @@ filebeat.inputs:
     multiline.match: after
 {% endif %}
 
+{% if COMPONENT == "payment" %}
+    include_lines: ['\[[0-9]\]']
+{% endif %}
+
 {% if OUTPUT_TO == "elasticsearch" %}
     json.keys_under_root: true
 setup.template.name: "{{COMPONENT}}"

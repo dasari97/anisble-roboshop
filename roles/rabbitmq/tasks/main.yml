@@ -4,7 +4,9 @@
     state: present
     
 - name: Setting up YUM repositories for RabbitMQ
-  shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash
+  copy:
+    src: rabbitmq.repo
+    dest: /etc/yum.repos.d/rabbitmq.repo
   
 - name: Installing RabbitMQ
   yum:

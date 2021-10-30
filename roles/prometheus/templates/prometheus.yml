@@ -34,14 +34,8 @@ scrape_configs:
         secret_key: {{SECRET_KEY}}
         port: 9100
         filters:
-          - name: "tag:Name"
-            values:
-              - frontend
-              - cart
-              - catalogue
-              - user
-              - shipping
-              - payment
+          - name: "tag:Monitor"
+            values: ["yes"]
 
     relabel_configs:
         - source_labels:

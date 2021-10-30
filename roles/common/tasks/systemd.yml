@@ -1,5 +1,5 @@
 - name: Configuring Systemd services
-  copy: 
+  template: 
     src: systemd.service
     dest: /etc/systemd/system/{{COMPONENT}}.service
     

@@ -24,13 +24,12 @@
   template:
     src: roboshop.conf
     dest: /etc/nginx/default.d/roboshop.conf
-    notify: Starting Nginx
+
     
 - name: Copying NGINX configuration File.
   ansible.builtin.copy:
     src: nginx.conf
     dest: /etc/nginx/nginx.conf
-    notify: Starting Nginx
     
 - name: Starting Nginx
   systemd:
@@ -51,3 +50,8 @@
     OUTPUT_TO: logstash
     NGINX: true
 
+- name: Starting Nginx
+  systemd:
+    name: nginx
+    state: restarted
+    enabled: yes

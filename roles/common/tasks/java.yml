@@ -5,6 +5,8 @@
     
 - name: Dowloading Files
   include_tasks: download.yml
+  vars:
+    APP_PATH: /home/roboshop/{{COMPONENT}}
   
 - name: Making Maven Package
   shell: mvn clean package ; mv target/shipping-1.0.jar shipping.jar

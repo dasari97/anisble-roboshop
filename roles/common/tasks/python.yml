@@ -8,6 +8,8 @@
     
 - name: Dowloading Files
   include_tasks: download.yml
+  vars:
+    APP_PATH: /home/roboshop/{{COMPONENT}}
     
 - name: Install python packages.
   pip:

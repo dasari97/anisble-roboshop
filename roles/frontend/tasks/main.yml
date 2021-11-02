@@ -3,7 +3,7 @@
     name: nginx
     state: present
     
-- name: Downlaoding Frontend zip File
+- name: Downlaoding Frontend ZIP File
   include_role:
     name: common
     tasks_from: download

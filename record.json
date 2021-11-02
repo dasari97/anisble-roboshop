@@ -3,7 +3,7 @@
             "Changes": [{
             "Action": "UPSERT",
                         "ResourceRecordSet": {
-                                    "Name": "INSTANCE_NAME.{{ENV}}.krishna.roboshop",
+                                    "Name": "INSTANCE_NAME.krishna.roboshop",
                                     "Type": "A",
                                     "TTL": 300,
                                  "ResourceRecords": [{ "Value": "INSTANCE_IP"}]

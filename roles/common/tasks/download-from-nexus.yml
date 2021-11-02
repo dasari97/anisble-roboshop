@@ -1,0 +1,61 @@
+- name: Creating Roboshop App user
+  user:
+    name: roboshop
+  register: ROBOSHOP_USER
+  when: APP_TYPE == "backend"
+    
+- name: Dowloading the Component content from Nexus.
+  get_url:
+    url: "http://172.31.87.47:8081/repository/{{COMPONENT}}/{{COMPONENT}}-{{APP_VERSION}}.zip"
+    dest: "/tmp/{{COMPONENT}}-{{APP_VERSION}}.zip"
+    username: admin
+    password: admin123
+    
+- name: Removing old file
+  ansible.builtin.file:
+    path: "{{APP_PATH}}"
+    state: absent
+    
+- name: Creating the APP Path for backend
+  ansible.builtin.file:
+    path: "{{APP_PATH}}"
+    state: directory
+  when: APP_TYPE == "backend"
+  become_user: roboshop
+  
+- name: Creating the APP Path for backend
+  ansible.builtin.file:
+    path: "{{APP_PATH}}"
+    state: directory
+  when: APP_TYPE == "frontend"
+
+    
+- name: extracting the Component content
+  ansible.builtin.unarchive:
+    src: "/tmp/{{COMPONENT}}-{{APP_VERSION}}.zip"
+    dest:"{{APP_PATH}}"
+  when: APP_TYPE == "backend"
+  become_user: roboshop
+  
+- name: extracting the Component content
+  ansible.builtin.unarchive:
+    src: "/tmp/{{COMPONENT}}-{{APP_VERSION}}.zip"
+    dest:"{{APP_PATH}}"
+  when: APP_TYPE == "frontend"
+
+  
+#- name: Copying extracted content to {{COMPONENT}} path
+#  ansible.builtin.copy:
+#    src: /tmp/{{COMPONENT}}-main/
+#    dest: /home/roboshop/{{COMPONENT}}
+#    remote_src: yes
+#    owner: roboshop
+#    group: roboshop
+#  when: APP_TYPE == "backend"
+  
+#- name: Copying extracted content to {{COMPONENT}} path
+#  ansible.builtin.copy:
+#    src: /tmp/{{COMPONENT}}-main/static/
+#    dest: "{{APP_PATH}}/"
+#    remote_src: yes
+#  when: APP_TYPE == "frontend"

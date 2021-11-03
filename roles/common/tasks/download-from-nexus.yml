@@ -33,7 +33,7 @@
 - name: extracting the Component content
   ansible.builtin.unarchive:
     src: "/tmp/{{COMPONENT}}-{{APP_VERSION}}.zip"
-    dest:"{{APP_PATH}}"
+    dest: "{{APP_PATH}}"
   when: APP_TYPE == "backend"
   become_user: roboshop
   

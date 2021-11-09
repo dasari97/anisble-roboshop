@@ -22,9 +22,6 @@
     state: directory
   when: APP_TYPE == "frontend"
   
-- name: Exit
-  shell: exit 1
-  
 - name: Copying Azure Repo file
   copy:
     src: az.repo
@@ -32,8 +29,11 @@
     
 - name: Installing AZ CLI
   yum:
-    name: [azure-cli,  ]
+    name: [azure-cli]
     state: present
+    
+- name: Exit
+  shell: exit 1
     
 - name: Downloading content from Azure Artifacts
   shell: az artifacts universal download --organization "https://dev.azure.com/dasarisaikrishna97/" --project "54339e52-4014-4697-b8af-f4bd001b418a" --scope project --feed "WS" --name "${COMPONENT}" --version "1.0.0" --path .

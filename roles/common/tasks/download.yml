@@ -2,6 +2,10 @@
   include_tasks: download-from-githud.yml
   when: APP_VERSION == "null"
   
-- name: Including Nexus Dowloaded Files
-  include_tasks: download-from-nexus.yml
+#- name: Including Nexus Dowloaded Files
+#  include_tasks: download-from-nexus.yml
+#  when: APP_VERSION != "null"
+  
+- name: Including Azure Dowloaded Files
+  include_tasks: download-from-az.yml
   when: APP_VERSION != "null"

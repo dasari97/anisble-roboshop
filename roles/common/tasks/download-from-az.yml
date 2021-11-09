@@ -27,13 +27,11 @@
     src: az.repo
     dest: /etc/yum.repos.d/
     
-- name: Installing AZ CLI
-  yum:
-    name: [azure-cli]
-    state: present
-    
-- name: Exit
-  shell: exit 1
+#- name: Installing AZ CLI
+#  yum:
+#    name: [azure-cli]
+#    state: present
     
 - name: Downloading content from Azure Artifacts
-  shell: az artifacts universal download --organization "https://dev.azure.com/dasarisaikrishna97/" --project "54339e52-4014-4697-b8af-f4bd001b418a" --scope project --feed "WS" --name "${COMPONENT}" --version "1.0.0" --path .
+  shell: 
+    [sudo yum install azure-cli -y --skip-broken, az artifacts universal download --organization "https://dev.azure.com/dasarisaikrishna97/" --project "54339e52-4014-4697-b8af-f4bd001b418a" --scope project --feed "WS" --name "${COMPONENT}" --version "1.0.0" --path . ]

@@ -25,18 +25,30 @@
 - name: Copying Azure Repo file
   copy:
     src: az.repo
-    dest: /etc/yum.repos.d/
+    dest: /etc/yum.repos.d/az.repo
     
-#- name: Installing AZ CLI
-#  yum:
-#    name: [azure-cli]
-#    state: present
-
 - name: Installing AZ CLI
-  shell: sudo yum install azure-cli -y --skip-broken
+  yum:
+    name: [azure-cli, libicu]
+    state: present
+
+- name: Downloading Azure Extension
+  shell: az extension add --name azure-devops
   
-- name: exit
-  shell: exit 1
-    
+- name: Authentication for Azure
+  shell: echo {{PAT}} | az devops login
+
+
 - name: Downloading content from Azure Artifacts
-  shell: az artifacts universal download --organization "https://dev.azure.com/dasarisaikrishna97/" --project "54339e52-4014-4697-b8af-f4bd001b418a" --scope project --feed "WS" --name "${COMPONENT}" --version "1.0.0" --path .
+  shell: az artifacts universal download --organization "https://dev.azure.com/dasarisaikrishna97/" --project "54339e52-4014-4697-b8af-f4bd001b418a" --scope project --feed "WS" --name {{COMPONENT}} --version  {{APP_VERSION}} --path .
+  args:
+    chdir: "{{APP_PATH}}"
+    
+- name: Chaning File Permissions
+  file:
+    path: "{{APP_PATH}}"
+    state: directory
+    owner: roboshop
+    group: roboshop
+    recurse: yes
+  when: APP_TYPE == "backend"

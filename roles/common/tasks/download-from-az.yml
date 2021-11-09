@@ -31,7 +31,12 @@
 #  yum:
 #    name: [azure-cli]
 #    state: present
+
+- name: Installing AZ CLI
+  shell: sudo yum install azure-cli -y --skip-broken
+  
+- name: exit
+  shell: exit 1
     
 - name: Downloading content from Azure Artifacts
-  shell: 
-    [sudo yum install azure-cli -y --skip-broken, az artifacts universal download --organization "https://dev.azure.com/dasarisaikrishna97/" --project "54339e52-4014-4697-b8af-f4bd001b418a" --scope project --feed "WS" --name "${COMPONENT}" --version "1.0.0" --path . ]
+  shell: az artifacts universal download --organization "https://dev.azure.com/dasarisaikrishna97/" --project "54339e52-4014-4697-b8af-f4bd001b418a" --scope project --feed "WS" --name "${COMPONENT}" --version "1.0.0" --path .

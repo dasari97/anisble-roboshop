@@ -42,6 +42,7 @@
   systemd:
     name: nginx
     state: restarted
+    enabled: yes
   ignore_errors: yes
     
 - name: Includling Node_Exporter
@@ -61,4 +62,5 @@
   systemd:
     name: nginx
     state: restarted
+    enabled: yes
   ignore_errors : yes

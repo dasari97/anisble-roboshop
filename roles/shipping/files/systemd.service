@@ -5,7 +5,7 @@ Description=Shipping Service
 User=roboshop
 Environment=CART_ENDPOINT=cart.krishna.roboshop:8080
 Environment=DB_HOST=mysql.krishna.roboshop
-ExecStart=/bin/java -jar /home/roboshop/shipping/shipping.jar
+ExecStart=/bin/java -Xmx3000m -jar /home/roboshop/shipping/shipping.jar
 SyslogIdentifier=shipping
 
 [Install]

@@ -1,6 +1,6 @@
 - name: Copying Logstash Config File.
   copy:
-    src: logstash.conf
+    src: logstash1.conf
     dest: /etc/logstash/conf.d/logstash.conf
 
 - name: Stopping Logstash.
